@@ -74,6 +74,14 @@ local plugins = {
       return M
     end
   },
+  {
+    "kylechui/nvim-surround",
+    version = "*",
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup()
+    end
+  }
 }
 
 return plugins

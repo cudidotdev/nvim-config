@@ -3,10 +3,11 @@ local capabilities = require("plugins.configs.lspconfig").capabilities
 
 local lspconfig = require('lspconfig')
 
-lspconfig.tsserver.setup {
+lspconfig.ts_ls.setup {
   filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "svelte" },
   on_attach = on_attach,
   capabilities = capabilities,
+  root_dir = require('lspconfig.util').root_pattern("package.json", "tsconfig.json")
 }
 
 lspconfig.svelte.setup {
