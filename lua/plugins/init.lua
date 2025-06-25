@@ -16,6 +16,7 @@ return {
   -- Enhanced syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
     opts = {
       ensure_installed = {
         "rust",
@@ -25,6 +26,7 @@ return {
         "css",
         "javascript",
         "typescript",
+        "tsx",
         "json",
         "yaml",
         "markdown",
@@ -36,7 +38,31 @@ return {
       highlight = {
         enable = true,
       },
+      indent = {
+        enable = true,
+      },
     },
+  },
+
+  -- Linting (since you're using conform for formatting)
+  {
+    "mfussenegger/nvim-lint",
+    event = "VeryLazy",
+    config = function()
+      local lint = require "lint"
+      lint.linters_by_ft = {
+        javascript = { "eslint" },
+        javascriptreact = { "eslint" },
+        typescript = { "eslint" },
+        typescriptreact = { "eslint" },
+      }
+
+      vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+        callback = function()
+          require("lint").try_lint()
+        end,
+      })
+    end,
   },
 
   {
