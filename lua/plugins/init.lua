@@ -99,7 +99,10 @@ return {
               cargo = {
                 allFeatures = true,
               },
-              checkOnSave = {
+              -- Enable checking on save
+              checkOnSave = true,
+              -- Specify that the command to run is "clippy"
+              check = {
                 command = "clippy",
               },
             },
