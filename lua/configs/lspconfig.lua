@@ -78,6 +78,21 @@ require("lspconfig").tailwindcss.setup {
   on_attach = configs.on_attach,
   on_init = configs.on_init,
   capabilities = configs.capabilities,
+  settings = {
+    tailwindCSS = {
+      files = {
+        exclude = {
+          "**/.git/**",
+          "**/node_modules/**",
+          "**/.next/**",
+          "**/dist/**",
+          "**/build/**",
+          "**/plasmo/**",
+          "**/.plasmo/**",
+        },
+      },
+    },
+  },
 }
 
 -- ESLint

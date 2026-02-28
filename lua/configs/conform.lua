@@ -15,6 +15,8 @@ local options = {
     css = { "prettier" },
     html = { "prettier" },
     javascript = { "prettier" },
+    json = { "prettier" },
+    toml = { "taplo" },
     typescript = { "prettier" },
     javascriptreact = { "prettier" },
     typescriptreact = { "prettier" },
@@ -24,7 +26,7 @@ local options = {
 
   format_on_save = {
     -- These options will be passed to conform.format()
-    timeout_ms = 1000,
+    timeout_ms = 5000,
     lsp_fallback = true,
   },
 }
