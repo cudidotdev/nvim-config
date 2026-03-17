@@ -1,0 +1,6 @@
+{
+  "diagnostics": {
+    "disable": ["mixed-table"],
+    "globals": ["vim"]
+  }
+}
