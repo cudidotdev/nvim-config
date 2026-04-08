@@ -2,7 +2,7 @@ return {
 
   {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
+    event = "BufWritePre", -- uncomment for format on save
     opts = require "configs.conform",
   },
 
@@ -30,6 +30,7 @@ return {
   -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
     opts = {
       ensure_installed = {
         "typescript",
@@ -79,6 +80,7 @@ return {
         -- Linters
         "eslint_d",
         "selene",
+        "deno",
       },
       auto_update = false,
       run_on_start = true,
