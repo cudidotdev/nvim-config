@@ -133,6 +133,7 @@ return {
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
     opts = {
+      root_dir = require("lspconfig.util").root_pattern "package.json", -- ← add this
       settings = {
         expose_as_code_action = "all",
         jsx_close_tag = { enable = true },
@@ -146,6 +147,10 @@ return {
     event = { "BufWritePost", "BufReadPost", "InsertLeave" },
     config = function()
       local lint = require "lint"
+      local function is_deno()
+        return vim.fs.find("deno.json", { upward = true, path = vim.api.nvim_buf_get_name(0) })[1] ~= nil
+      end
+
       lint.linters_by_ft = {
         javascript = { "eslint_d" },
         typescript = { "eslint_d" },
@@ -153,9 +158,12 @@ return {
         typescriptreact = { "eslint_d" },
         lua = { "selene" },
       }
+
       vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
         callback = function()
-          lint.try_lint()
+          if not is_deno() then -- ← guard added
+            lint.try_lint()
+          end
         end,
       })
     end,
